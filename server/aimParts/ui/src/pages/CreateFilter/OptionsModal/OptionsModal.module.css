@@ -1,0 +1,11 @@
+.optionsWrap{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 70vh;
+    overflow-x: auto;
+}
+
+.option{
+    margin-right: 4%;
+}

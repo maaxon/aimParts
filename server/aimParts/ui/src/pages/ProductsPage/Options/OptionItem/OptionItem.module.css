@@ -1,0 +1,9 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-left: 1vw;
+}
+.wrapper h5{
+    font-size: 95%;
+    padding: 0.5vh 0 0.1vh 0;
+}

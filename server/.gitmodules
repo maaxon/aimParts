@@ -1,0 +1,3 @@
+[submodule "aimParts"]
+	path = aimParts
+	url = https://github.com/maaxon/aimParts.git

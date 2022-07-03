@@ -1,0 +1,23 @@
+.mainWrap{
+    display: grid;
+    grid-template-columns:15vw 75vw ;
+    grid-column-gap: 7vw;
+}
+.leftSide{
+    border-right: #C4C4C4 1px solid;
+    padding-left: 1vw;
+    height: 84vh;
+}
+.title{
+    border-bottom: 1px solid #C4C4C4;
+    border-top: 1px solid #C4C4C4;
+}
+.title h3{
+    margin:1vh 0 1vh 3vw;
+    font-family: 'Righteous', cursive;
+}
+.productsWrap{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}

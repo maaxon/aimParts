@@ -1,0 +1,9 @@
+.wrap{
+    margin: 3vh 0 3vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form{
+    width: 70%;
+}

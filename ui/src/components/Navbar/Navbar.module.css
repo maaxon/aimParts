@@ -1,0 +1,7 @@
+.mainNav{
+  font-family: 'Righteous', cursive;
+}
+.collapse{
+  display: flex;
+  justify-content: center;
+}
