@@ -11,12 +11,11 @@ const UserDropdown:FC = ()=>{
     const {user} = useAppSelector(state => state.UserReducer)
     let admin
     if (user){
-        admin = user.role == "admin" ?    <NavDropdown.Item as={"div"} ><Link className={'nav-link'} to={'/admin'}>admin panel</Link></NavDropdown.Item> :''
+        admin = user.role === "admin" ?    <NavDropdown.Item as={"div"} ><Link className={'nav-link'} to={'/admin'}>admin panel</Link></NavDropdown.Item> :''
     }
 
     return(
         <NavDropdown title="User" id="nav-dropdown">
-            <NavDropdown.Item as={"div"} ><Link className={'nav-link'} to={'/profile'}>profile</Link></NavDropdown.Item>
             {
                 user ? <NavDropdown.Item as={"div"} ><Link className={'nav-link'} to={`/orders/${user._id}`}>orders</Link></NavDropdown.Item>:''
             }

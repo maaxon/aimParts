@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FiltersService } from './filters.service';
 import { CreateFilterDto } from './dto/create-filter.dto';
 import { UpdateFilterDto } from './dto/update-filter.dto';
-import {Product} from "../products/schemas/product.schema";
 
 @Controller('filters')
 export class FiltersController {
@@ -13,9 +12,9 @@ export class FiltersController {
     return this.filtersService.create(createFilterDto);
   }
 
-  @Get()
-  findAll() {
-    return this.filtersService.getAll();
+  @Get(":limit")
+  findAll(@Param('limit') limit: number) {
+    return this.filtersService.getAll(limit);
   }
 
   @Get(':id')
@@ -32,7 +31,7 @@ export class FiltersController {
   remove(@Param('id') id: string) {
     return this.filtersService.remove(id);
   }
-  @Get('category/:id')
+  @Get('/category/:id')
   getByCategory(@Param('id') id: string){
     return this.filtersService.getByCategory(id)
   }

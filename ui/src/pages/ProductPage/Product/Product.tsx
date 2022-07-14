@@ -5,6 +5,8 @@ import {Button, ListGroup} from "react-bootstrap";
 import {IProductById} from "../../../models/IProduct";
 import {useAppDispatch} from "../../../hooks/redux";
 import {CartSlice} from "../../../store/reducers/CartReducer";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface ProductPageProps {
     product:IProductById | undefined
@@ -23,6 +25,25 @@ const Product:FC<ProductPageProps> = ({product})=>{
             const {_id,desc,title,price,img} = product
             dispatch(addToCart({_id,title,price,desc,img}))
         }
+    }
+
+    if (!product){
+        return (
+            <>
+                <div className={classes.wrapper}>
+                        <Skeleton className={classes.skeleton}/>
+                    <div className={classes.elementsWrap}>
+                        <ListGroup className={'w-100'}>
+                            <ListGroup.Item className={'d-flex justify-content-around'}><h5>Характеристики</h5></ListGroup.Item>
+                            <ListGroup.Item  className={'d-flex justify-content-around'}><Skeleton containerClassName={"w-25"}/><Skeleton containerClassName={"w-25"}/></ListGroup.Item>
+                            <ListGroup.Item  className={'d-flex justify-content-around'}><Skeleton containerClassName={"w-25"}/><Skeleton containerClassName={"w-25"}/></ListGroup.Item>
+                            <ListGroup.Item  className={'d-flex justify-content-around'}><Skeleton containerClassName={"w-25"}/><Skeleton containerClassName={"w-25"}/></ListGroup.Item>
+                        </ListGroup>
+                    </div>
+
+                </div>
+            </>
+        )
     }
 
     return(

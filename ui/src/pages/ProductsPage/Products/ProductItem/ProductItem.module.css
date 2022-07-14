@@ -1,6 +1,6 @@
 .card{
-    width: 20vw;
-    height: 40vh;
+    width: 16vw;
+    height: 37vh;
     margin: 5vh 0 5vh 0;
 }
 .card img{
@@ -13,4 +13,17 @@
 .link{
     text-decoration: none;
     color: black;
+}
+
+@media (max-width: 576px) {
+    .card{
+        width: 40vw;
+        height: 30vh;
+    }
+}
+
+@media  (min-width: 576px) and (max-width: 768px) {
+   .card{
+       height: 20vh;
+   }
 }

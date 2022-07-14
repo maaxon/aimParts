@@ -15,8 +15,8 @@ export class UsersService {
                 private OrdersService:OrdersService) {
     }
 
-    async getAll(): Promise<User[]>{
-        return this.userModel.find()
+    async getAll(limit:number): Promise<User[]>{
+        return this.userModel.find().limit(limit)
     }
 
     async getById(id: string): Promise<User> {

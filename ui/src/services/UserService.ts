@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 import {IUpdateUserRole, IUser} from "../models/IUser";
-import {IProduct, IUpdateProduct} from "../models/IProduct";
 
 
 export const userApi = createApi({
@@ -8,9 +7,9 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/users'}),
     tagTypes:['Delete','Patch'],
     endpoints:(build)=> ({
-        fetchAllUsers: build.query<IUser[],void>({
-            query:()=>({
-                url: `/`,
+        fetchAllUsers: build.query<IUser[],number>({
+            query:(limit)=>({
+                url: `/${limit}`,
             }),
             providesTags:result => ['Delete','Patch']
         }),

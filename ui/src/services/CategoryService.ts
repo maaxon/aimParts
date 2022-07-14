@@ -10,9 +10,9 @@ export const categoriesApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/categories'}),
     tagTypes:['Post','Delete','Patch'],
     endpoints:(build)=> ({
-        fetchCategories: build.query<ICategory[],void>({
-            query:()=>({
-                url: `/`,
+        fetchCategories: build.query<ICategory[],number>({
+            query:(limit)=>({
+                url: `/${limit}`,
             }),
             providesTags:result => ['Post','Delete','Patch']
         }),

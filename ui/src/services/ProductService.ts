@@ -1,10 +1,12 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 import {ICreateProduct, IProduct, IProductById, IUpdateProduct} from "../models/IProduct";
+import {IStateFilter} from "../models/IStateFilter";
 
 
 interface fetchByCategory {
     categoryId:string | undefined
     limit:number
+    filters:IStateFilter[]
 }
 
 
@@ -28,8 +30,10 @@ export const productApi = createApi({
             providesTags:result => ['Post','Delete','Patch']
         }),
         fetchProductsByCategory: build.query<IProduct[],fetchByCategory>({
-            query:({categoryId,limit=0})=>({
+            query:({categoryId,limit=0,filters})=>({
                 url: `/category/${categoryId}/${limit}`,
+                body:filters,
+                method:"POST",
             }),
             providesTags:result => ['Post','Delete','Patch']
         })

@@ -24,9 +24,9 @@ export class OptionsController {
     }
 
 
-    @Get()
-    getAll(): Promise<Option[]> {
-        return this.optionsService.getAll()
+    @Get(":limit")
+    getAll(@Param('limit') limit: number): Promise<Option[]> {
+        return this.optionsService.getAll(limit)
     }
 
     @Get(':id')

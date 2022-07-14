@@ -12,9 +12,9 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {
     }
 
-    @Get()
-    getUsers():Promise<User[]>{
-        return this.usersService.getAll()
+    @Get(":limit")
+    getUsers(@Param('limit') limit: number):Promise<User[]>{
+        return this.usersService.getAll(limit)
     }
 
     @Get(':id')

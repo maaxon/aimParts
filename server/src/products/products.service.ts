@@ -4,6 +4,7 @@ import {Model} from 'mongoose';
 import {CreateProductDto} from './dto/create-product.dto';
 import {Product, ProductDocument} from './schemas/product.schema';
 import {UpdateProductDto} from './dto/update-product.dto';
+import {AppFilter} from "./dto/AppFilter";
 
 
 
@@ -43,7 +44,24 @@ export class ProductsService {
   async update(id: string, productDto: UpdateProductDto): Promise<Product> {
     return this.productModel.findByIdAndUpdate(id, productDto, {new: true})
   }
-  async getByCategory(category_id:string,limit:number): Promise<Product[]>{
+  async getByCategory(category_id:string,limit:number,filters:AppFilter[]): Promise<Product[]>{
+
+    let empty=true
+    filters.forEach(filter=>{
+      if (empty) empty=filter.options.length<1
+    })
+
+    if (!empty){
+
+      const selector = filters.reduce((results, filter) => {
+        if (filter.options.length>0) results.push({options:{$in:filter.options}})
+        return results
+      }, [])
+      return this.productModel.find({category:category_id}).and(selector).limit(limit)
+    }
     return this.productModel.find({category:category_id}).limit(limit)
   }
+
+
+
 }

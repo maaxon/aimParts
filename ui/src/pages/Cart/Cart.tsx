@@ -28,7 +28,7 @@ const Cart:FC = () => {
     return(
         <div className={classes.cartWrap}>
                 <h1>Cart</h1>
-            <div className={classes.tableWrap}>
+            <div className={`table-responsive ${classes.tableWrap}`}>
                 <Table className={"w-100"}>
                     <thead>
                         <tr>

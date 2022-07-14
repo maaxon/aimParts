@@ -41,9 +41,9 @@ const CreateFilter: FC<CreateProductProps> =({updatingFilter= undefined,updateFi
 
     const [form,setForm] = useState(defaultFormState)
 
-    const {data:categories} = categoriesApi.useFetchCategoriesQuery()
+    const {data:categories} = categoriesApi.useFetchCategoriesQuery(0)
 
-    const {data:options} = optionsApi.useFetchOptionsQuery()
+    const {data:options} = optionsApi.useFetchOptionsQuery(10)
 
     const [createFilter] = filterApi.useCreateFilterMutation()
 
@@ -77,12 +77,10 @@ const CreateFilter: FC<CreateProductProps> =({updatingFilter= undefined,updateFi
         navigate("/admin/filters")
     }
 
-    console.log(form)
-
     return (
         <AdminWrap>
             <div className={classes.wrap}>
-                <h3>Создание товара</h3>
+                <h3>Create filter</h3>
                 <div className={classes.form}>
                     <Form onSubmit={submitHandler} >
                         <Form.Group className="mb-3" controlId="formBasicEmail">

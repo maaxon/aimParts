@@ -1,10 +1,7 @@
 import React, {FC} from "react";
 import Login from "./Login/Login";
-import {UserSlice} from "../../store/reducers/UserReducer";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {LoginUser} from "../../store/reducers/ActionCreators";
-import {NavDropdown} from "react-bootstrap";
-import {Link} from "react-router-dom";
 import UserDropdown from "./UserDropdown/UserDropdown";
 
 const LoginController: FC = () =>{

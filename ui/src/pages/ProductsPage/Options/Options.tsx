@@ -12,18 +12,16 @@ import {useParams} from "react-router-dom";
 const Options: FC = ()=>{
 
     let params = useParams();
-    useLayoutEffect(() => () => {
-        dispatch(uncheckAllOptions())
-    }, [])
+
 
     const {data:filters} = filterApi.useFetchFiltersByCategoryQuery(params.categoryId)
 
     useEffect(()=>{
-        if (filters) dispatch(initiateFilters(filters))
+        if (filters && stateFilters.length<1) dispatch(initiateFilters(filters))
     },[filters])
 
     const dispatch = useAppDispatch()
-    const {initiateFilters,uncheckAllOptions} = checkedOptionsSlice.actions
+    const {initiateFilters} = checkedOptionsSlice.actions
     const {filters:stateFilters} = useAppSelector(state => state.checkedOptionReducer)
 
 

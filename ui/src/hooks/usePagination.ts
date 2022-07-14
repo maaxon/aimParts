@@ -26,8 +26,10 @@ const usePagination: UsePagination = ({ contentPerPage, count }) => {
             const temp = new Array(pageCount - 1).fill(1).map((_, i) => i + 2);
             setPagesInBetween(temp);
         }
+        if (pageCount<=2){
+            setPagesInBetween([])
+        }
     }, [pageCount]);
-
     // to set the pages between the gaps depending on position of current page
     //and to setGaps Depending on position of current page
     useEffect(() => {
@@ -66,6 +68,8 @@ const usePagination: UsePagination = ({ contentPerPage, count }) => {
         }
         setGaps({ paginationGroup, before, after });
     }, [page, pagesInBetween, pageCount]);
+
+
 
     // change page based on direction either front or back
     const changePage = (direction: boolean) => {

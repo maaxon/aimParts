@@ -12,8 +12,8 @@ export class OptionsService {
     constructor(@InjectModel(Option.name) private optionModel: Model<OptionDocument>) {
     }
 
-    async getAll(): Promise<Option[]> {
-        return this.optionModel.find().populate('filter')
+    async getAll(limit:number): Promise<Option[]> {
+        return this.optionModel.find().limit(limit).populate('filter')
     }
 
     async getById(id: string): Promise<Option> {

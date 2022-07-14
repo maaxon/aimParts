@@ -10,8 +10,7 @@ const ProductPage:FC = ()=>{
 
     let params = useParams();
 
-    const {data:product,isLoading} = productApi.useFetchProductByIdQuery(params.productId)
-    if (isLoading) return <AppSpinner/>
+    const {data:product} = productApi.useFetchProductByIdQuery(params.productId)
     return <Product product={product}/>
 }
 export default ProductPage

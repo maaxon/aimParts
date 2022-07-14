@@ -1,11 +1,18 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import {categoriesApi} from "../../services/CategoryService";
 import AdminTable, {Field} from "../../components/AdminTable/AdminTable";
+import usePagination from "../../hooks/usePagination";
+import AppPagination from "../../components/AppPagination/AppPagination";
+import AppSpinner from "../../components/AppSpinner/AppSpinner";
 
 
 const AdminCategories:FC =()=>{
 
-    const {data:categories} = categoriesApi.useFetchCategoriesQuery()
+    const prodPerPage = 4
+
+    const [limit,setLimit] = useState(prodPerPage*3)
+
+    const {data:categories,isFetching} = categoriesApi.useFetchCategoriesQuery(limit)
 
     const [updateCategory] = categoriesApi.useUpdateCategoryMutation()
 
@@ -13,6 +20,25 @@ const AdminCategories:FC =()=>{
 
     const [createCategory] = categoriesApi.useCreateCategoryMutation()
 
+
+
+    const {
+        firstContentIndex,
+        lastContentIndex,
+        nextPage,
+        prevPage,
+        page,
+        setPage,
+        totalPages,
+        gaps
+    } = usePagination({
+        contentPerPage: prodPerPage,
+        count: categories ? categories.length: 0,
+    });
+
+    if (limit <= totalPages*prodPerPage){
+        if (page === totalPages) setLimit(limit + prodPerPage*2)
+    }
 
     if (categories){
 
@@ -23,12 +49,17 @@ const AdminCategories:FC =()=>{
             updateCategory({id,title})
         }
 
-        const fields:Field[] = categories.map(({_id,title})=> {return {id:_id,firstItem:_id,title}})
+        const fields:Field[] = categories.slice(firstContentIndex,lastContentIndex).map(({_id,title})=> {return {id:_id,firstItem:_id,title}})
         return(
-            <AdminTable fields={fields} createField={createCategory} updateField={onUpdate} deleteField={deleteCategory} />
+            <>
+            <AdminTable tableTitle={"Categories"} fields={fields} createField={createCategory} updateField={onUpdate} deleteField={deleteCategory} />
+                <div className={"float-end m-4"}>
+                    <AppPagination isFetching={isFetching} gaps={gaps} totalPages={totalPages} nextPage={nextPage} page={page} prevPage={prevPage} setPage={setPage}/>
+                </div>
+            </>
         )
     }
-    return <h1>loading</h1>
+    return <AppSpinner/>
 
 }
 

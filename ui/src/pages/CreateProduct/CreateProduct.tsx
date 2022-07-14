@@ -50,7 +50,7 @@ const CreateProduct: FC<CreateProductProps> =({updatingProduct= undefined,update
 
     const [form,setForm] = useState(defaultFormState)
 
-    const {data:categories} = categoriesApi.useFetchCategoriesQuery()
+    const {data:categories} = categoriesApi.useFetchCategoriesQuery(0)
 
     const {data:filters} = filterApi.useFetchFiltersByCategoryQuery(form.category)
 
@@ -72,7 +72,7 @@ const CreateProduct: FC<CreateProductProps> =({updatingProduct= undefined,update
 
     const radioChangeHandler = (e:React.ChangeEvent<HTMLInputElement>) =>{
         let  options:option[] = form.options
-        const prevSelectedOption = form.options.find((option:option)=>option.title == e.target.name)
+        const prevSelectedOption = form.options.find((option:option)=>option.title === e.target.name)
         if (prevSelectedOption){
            options = options.filter((option)=> option.title !== prevSelectedOption.title  )
         }
@@ -101,7 +101,7 @@ const CreateProduct: FC<CreateProductProps> =({updatingProduct= undefined,update
     return (
         <AdminWrap>
             <div className={classes.wrap}>
-                <h3>Создание товара</h3>
+                <h3>Create product</h3>
                 <div className={classes.form}>
                     <Form onSubmit={submitHandler} >
                         <Form.Group className="mb-3" controlId="formBasicEmail">

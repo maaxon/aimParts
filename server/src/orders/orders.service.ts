@@ -12,8 +12,8 @@ export class OrdersService {
   constructor(@InjectModel(Order.name) private orderModel: Model<OrderDocument>,
               @InjectModel(User.name) private userModel: Model<UserDocument>,) {}
 
-  async getAll(): Promise<Order[]> {
-    return( this.orderModel.find().populate('user').populate({
+  async getAll(limit:number): Promise<Order[]> {
+    return( this.orderModel.find().limit(limit).populate('user').populate({
       path: 'products',
       populate: {
         path: 'product',

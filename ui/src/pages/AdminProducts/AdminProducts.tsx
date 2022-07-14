@@ -1,13 +1,39 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import AdminProductCard from "./AdminProductCard/AdminProductCard";
 import AdminWrap from "../../components/AdminWrap/AdminWrap";
 import {productApi} from "../../services/ProductService";
+import usePagination from "../../hooks/usePagination";
+import AppPagination from "../../components/AppPagination/AppPagination";
+import AppSpinner from "../../components/AppSpinner/AppSpinner";
 
 
 const AdminProducts: FC =()=>{
 
-    const {data:products} = productApi.useFetchProductsQuery(0)
+    const prodPerPage = 4
 
+    const [limit,setLimit] = useState(prodPerPage*3)
+
+    const {data:products,isFetching,isLoading} = productApi.useFetchProductsQuery(limit)
+
+    const {
+        firstContentIndex,
+        lastContentIndex,
+        nextPage,
+        prevPage,
+        page,
+        setPage,
+        totalPages,
+        gaps
+    } = usePagination({
+        contentPerPage: prodPerPage,
+        count: products ? products.length: 0,
+    });
+
+    if (limit <= totalPages*prodPerPage){
+        if (page === totalPages) setLimit(limit + prodPerPage*2)
+    }
+
+    if (isLoading) return <AppSpinner/>
 
     return (
         <AdminWrap>
@@ -23,17 +49,6 @@ const AdminProducts: FC =()=>{
                                 <option>Sports</option>
                             </select>
                         </div>
-                        <div className="col-md-2 col-6">
-                            <input type="date" className="form-control"/>
-                        </div>
-                        <div className="col-md-2 col-6">
-                            <select className="form-select">
-                                <option>Status</option>
-                                <option>Active</option>
-                                <option>Disabled</option>
-                                <option>Show all</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div className="card-body">
@@ -42,11 +57,15 @@ const AdminProducts: FC =()=>{
                         <table className="table align-middle table-striped">
                             <tbody>
                             {
-                                products && products.map((product)=> <AdminProductCard img={product.img} title={product.title} id={product._id} price={product.price} /> )
+                                products && products.slice(firstContentIndex,lastContentIndex).map((product)=> <AdminProductCard key={product._id} img={product.img} title={product.title} id={product._id} price={product.price} /> )
                             }
                             </tbody>
                         </table>
                     </div>
+                    <div className={"float-end"}>
+                        <AppPagination isFetching={isFetching} gaps={gaps} totalPages={totalPages} nextPage={nextPage} page={page} prevPage={prevPage} setPage={setPage}/>
+                    </div>
+
                 </div>
             </div>
         </AdminWrap>)

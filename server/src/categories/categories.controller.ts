@@ -12,9 +12,9 @@ export class CategoriesController {
     return this.categoriesService.create(createCategoryDto);
   }
 
-  @Get()
-  findAll() {
-    return this.categoriesService.getAll();
+  @Get(":limit")
+  findAll(@Param('id') limit:number) {
+    return this.categoriesService.getAll(limit);
   }
 
   @Get(':id')

@@ -8,6 +8,7 @@ interface AdminTableProps {
     createField():void
     updateField(id:string,title:string):void
     deleteField(id:string):void
+    tableTitle:string
 }
 export interface Field {
     firstItem:string
@@ -15,19 +16,19 @@ export interface Field {
     id:string
 }
 
-const AdminTable:FC<AdminTableProps> =({fields,createField,updateField,deleteField})=>{
+const AdminTable:FC<AdminTableProps> =({fields,createField,updateField,deleteField,tableTitle})=>{
 
 
 
     return(
         <AdminWrap>
-            <h1>Categories</h1>
-            <div className="card-body">
+            <h1>{tableTitle}</h1>
+            <div className="card-body table-responsive">
                 <table className={"align-middle table text-center"}>
                     <thead className="table-light">
                     <tr >
                         <th>ID</th>
-                        <th>category title</th>
+                        <th>title</th>
                         <th>update</th>
                         <th>delete</th>
                     </tr>
@@ -40,7 +41,7 @@ const AdminTable:FC<AdminTableProps> =({fields,createField,updateField,deleteFie
 
                 </table>
                 <div className="d-flex justify-content-end">
-                    <Button onClick={createField} className={"align-right"} variant={"outline-primary"} >Create category</Button>
+                    <Button onClick={createField} className={"align-right"} variant={"outline-primary"} >Create {tableTitle}</Button>
                 </div>
 
             </div>

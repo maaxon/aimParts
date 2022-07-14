@@ -17,8 +17,8 @@ export class CategoriesService {
     return newProduct.save()
   }
 
-  getAll() {
-    return this.categoryModel.find()
+  getAll(limit:number) {
+    return this.categoryModel.find().limit(limit)
   }
 
   findOne(id: string) {

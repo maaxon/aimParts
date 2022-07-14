@@ -8,9 +8,9 @@ export const optionsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/options'}),
     tagTypes:['Post','Delete','Patch'],
     endpoints:(build)=> ({
-        fetchOptions: build.query<IOption[],void>({
-            query:()=>({
-                url: `/`,
+        fetchOptions: build.query<IOption[],number>({
+            query:(limit:number)=>({
+                url: `/${limit}`,
             }),
             providesTags:result => ['Post','Delete','Patch']
         }),

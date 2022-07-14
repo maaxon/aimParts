@@ -9,9 +9,9 @@ export const filterApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/filters'}),
     tagTypes:['Post','Delete','Patch'],
     endpoints:(build)=> ({
-        fetchFilters: build.query<IFilter[],void>({
-            query:()=>({
-                url: `/`,
+        fetchFilters: build.query<IFilter[],number>({
+            query:(limit)=>({
+                url: `/${limit}`,
             }),
             providesTags:result => ['Post','Delete','Patch']
         }),

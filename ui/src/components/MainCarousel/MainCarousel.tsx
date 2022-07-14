@@ -1,5 +1,7 @@
 import React, {FC} from "react";
 import {Carousel} from "react-bootstrap";
+import classes from "./mainCarousel.module.css";
+
 
 interface CarouselProps{
     slides:ISlides[]
@@ -19,10 +21,9 @@ const MainCarousel: FC<CarouselProps> =({slides})=> {
                 return(
                 <Carousel.Item key={idx} interval={slide.interval}>
                     <img
-                        className="d-block w-100"
+                        className={classes.slideImg}
                         src={slide.img}
                         alt="First slide"
-                        style={{height:'60vh'}}
                     />
                     <Carousel.Caption>
                         <h3>{slide.title}</h3>

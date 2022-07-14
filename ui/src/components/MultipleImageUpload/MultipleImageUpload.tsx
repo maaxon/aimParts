@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import AliceCarousel from "react-alice-carousel";
 import 'react-alice-carousel/lib/alice-carousel.css';
-import ImgCard from "../../pages/ImgCard/ImgCard";
+import ImgCard from "./ImgCard/ImgCard";
 import {Button, Card} from "react-bootstrap";
 
 

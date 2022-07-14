@@ -1,54 +1,49 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import classes from "../../pages/ProductsPage/Products/Products.module.css";
+import {Container, Nav, Navbar} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import SideBar from "../SideBar/SideBar";
+import {useAppSelector} from "../../hooks/redux";
+import { useNavigate } from "react-router-dom";
+
 
 interface AdminWrapProps  {
-    children?: React.ReactNode
+    children: React.ReactNode
 }
 
-const AdminWrap: FC =(props:AdminWrapProps)=>{
+const AdminWrap: FC<AdminWrapProps> =({children})=>{
+
+    const {user} = useAppSelector(state => state.UserReducer)
+    const navigate = useNavigate();
 
 
+    useEffect(()=>{
+        if (!user || user.role !== "admin") navigate('/')
+    })
 
     return (
         <>
-            <div className={classes.title}><h3>Cars</h3></div>
             <div className={classes.mainWrap}>
-                <div className={classes.leftSide}>
-                    <ul className="nav nav-pills flex-column ">
-                        <li className="nav-item">
-                            <a href="#" className="nav-link active" aria-current="page">
-
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link link-dark">
-
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link link-dark">
-
-                                Orders
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link link-dark">
-
-                                Products
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link link-dark">
-
-                                Customers
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <SideBar>
+                    <div className={classes.leftSide}>
+                        <Navbar>
+                            <Container >
+                                <Nav className={"d-flex flex-column"}>
+                                    <Nav><Link className={'nav-link'} to="/admin">Products</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/createProduct">Create product</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/admin/categories">Categories</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/admin/filters">Filters</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/createFilter">Create filter</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/admin/options">Options</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/admin/users">Users</Link></Nav>
+                                    <Nav><Link className={'nav-link'} to="/admin/orders">Orders</Link></Nav>
+                                </Nav>
+                            </Container>
+                        </Navbar>
+                    </div>
+                </SideBar>
                 <div>
-                    {props.children}
+                    {children}
                 </div>
             </div>
         </>)

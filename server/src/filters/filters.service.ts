@@ -13,8 +13,8 @@ export class FiltersService {
               private optionsService: OptionsService) {
   }
 
-  async getAll(): Promise<Filter[]> {
-    return this.filterModel.find().populate('options').populate("categories")
+  async getAll(limit:number): Promise<Filter[]> {
+    return this.filterModel.find().limit(limit).populate('options').populate("categories")
   }
 
   async getById(id: string): Promise<Filter> {

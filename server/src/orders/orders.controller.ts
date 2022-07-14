@@ -12,9 +12,9 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto);
   }
 
-  @Get()
-  findAll() {
-    return this.ordersService.getAll();
+  @Get(":limit")
+  findAll(@Param('limit') limit: number) {
+    return this.ordersService.getAll(limit);
   }
 
   @Get('user/:id')

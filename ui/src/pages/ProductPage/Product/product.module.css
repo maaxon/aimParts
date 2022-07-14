@@ -5,7 +5,22 @@
 }
 
 .elementsWrap{
-    width: 70vw;
+    width:50vw;
     margin-top: 5vh;
     margin-bottom: 5vh;
+}
+.skeleton{
+    width: 55vw !important;
+    height: 50vh;
+    margin-top: 3vh;
+}
+
+@media (max-width: 768px) {
+    .skeleton{
+        height: 35vh;
+        width: 70vw !important;
+    }
+    .elementsWrap{
+        width:70vw;
+    }
 }

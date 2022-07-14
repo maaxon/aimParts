@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 import {ICreateOrder, IOrder} from "../models/IOrder";
-import {ICreateProduct, IProduct, IUpdateProduct} from "../models/IProduct";
 
 
 export const orderApi = createApi({
@@ -8,9 +7,9 @@ export const orderApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/orders'}),
     tagTypes:['Post','Delete'],
     endpoints:(build)=> ({
-        fetchOrders: build.query<IOrder[],void>({
-            query:()=>({
-                url: `/`,
+        fetchOrders: build.query<IOrder[],number>({
+            query:(limit)=>({
+                url: `/${limit}`,
             }),
             providesTags:result => ['Post','Delete']
         }),

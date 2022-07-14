@@ -19,7 +19,7 @@ const ProductItem:FC<ProductItemProps> = ({img,title,desc,price,id}) =>{
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                     <Card.Text>
-                        {desc}
+                       ${price}
                     </Card.Text>
             </Card.Body>
             </Link>

@@ -1,9 +1,8 @@
 import React, {FC, useState} from "react";
-import {Button, Form, Modal, Nav} from "react-bootstrap";
+import {Modal, Nav} from "react-bootstrap";
 import LoginForm from "./LoginForm/LoginForm";
 import RegisterForm from "./RegistrationForm/RegistrationForm";
-import {useAppDispatch} from "../../../hooks/redux";
-import {UserSlice} from "../../../store/reducers/UserReducer";
+
 
 
 
@@ -26,10 +25,10 @@ const Login:FC =()=> {
                 <Modal.Body>
                     <Nav className={'flex-row justify-content-evenly'}>
                         <Nav.Item>
-                            <Nav onClick={()=>{setForm(<LoginForm />)}}>Active</Nav>
+                            <Nav onClick={()=>{setForm(<LoginForm />)}}>Login</Nav>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav onClick={()=>{setForm(<RegisterForm />)}}>Option 2</Nav>
+                            <Nav onClick={()=>{setForm(<RegisterForm />)}}>Register</Nav>
                         </Nav.Item>
                     </Nav>
 

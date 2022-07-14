@@ -3,13 +3,17 @@ import React from "react";
 import {Link} from "react-router-dom";
 import classes from "./Navbar.module.css";
 import {categoriesApi} from "../../services/CategoryService";
-import Login from "../LoginController/Login/Login";
 import LoginController from "../LoginController/LoginController";
+import {useAppDispatch} from "../../hooks/redux";
+import {checkedOptionsSlice} from "../../store/reducers/CheckedOptionsSlice";
 
 
 export  default function Navigation() {
 
-    const {data:categories} = categoriesApi.useFetchCategoriesQuery()
+    const {data:categories} = categoriesApi.useFetchCategoriesQuery(0)
+
+    const dispatch = useAppDispatch()
+    const {uncheckAllOptions} = checkedOptionsSlice.actions
 
     return(
         <Navbar bg="light" expand="lg" className={classes.mainNav}>
@@ -20,7 +24,7 @@ export  default function Navigation() {
                 <Nav>
                     <Nav><Link className={'nav-link'} to="/">Home</Link></Nav>
                     {categories && categories.map(category => {
-                        return <Nav key={category._id}><Link className={'nav-link'} to={`/products/${category._id}`}>{category.title}</Link></Nav>
+                        return <Nav key={category._id} onClick={()=>{dispatch(uncheckAllOptions())}}><Link className={'nav-link'} to={`/products/${category._id}`}>{category.title}</Link></Nav>
                     })}
                     <Nav><Link className={'nav-link'} to="/cart">Cart</Link></Nav>
                     <Nav><LoginController/></Nav>

@@ -31,7 +31,7 @@ const AdminFiltersItem:FC<AdminFiltersItemProps> = ({index,filter,onDelete})=>{
                     </ul>
 
                 </div>
-                    <Link to={`/updateFilter/${filter._id}`} ><Button variant={"outline-primary"}>update</Button></Link>
+                    <Link className={"me-2"} to={`/updateFilter/${filter._id}`} ><Button variant={"outline-primary"}>update</Button></Link>
                     <Button variant={"outline-danger"} onClick={()=>{onDelete(filter._id)}} >delete</Button>
 
             </Accordion.Body>

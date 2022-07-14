@@ -21,3 +21,33 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+.skeleton{
+    width: 20vw;
+    height: 40vh;
+}
+
+
+@media (max-width: 576px) {
+    .leftSide{
+        border-right: none;
+        background: white;
+    }
+    .skeleton{
+        width:45vw;
+        height: 30vh;
+        margin-top: 3vh;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .leftSide{
+        border-right: none;
+        background: white;
+    }
+    .skeleton{
+        height: 20vh;
+        margin-top: 3vh;
+    }
+}
